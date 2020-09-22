@@ -13,10 +13,14 @@ class TDAConjuntos{
 					conta++;
 				}
 			}
-			cad=cad+conjuntoA[i]+",";
+			if(conta==0) {
+				cad=cad+conjuntoA[i];
+			}else {
+				
+			}
 		}
 	return null;	
-	}
+	}//Union
 	public String[] interseccion(String conjuntoA[],String []conjuntoB) {
 		byte conta=0;
 		String cad="";
@@ -33,7 +37,40 @@ class TDAConjuntos{
 			conta=0;
 		}
 		
-		return cad.split(",");
+		return cad.split(",");	
+	}
+	public String[] diferencia(String conjuntoA[],String []conjuntoB,String op) {
+		String cad="";
+		byte conta=0;
+		String diferencia[]=null;
+		if(op.equalsIgnoreCase("A")) {
+			for (int i=0;i<conjuntoA.length;i++) {
+				for(int x=0;x<conjuntoB.length;x++) {
+					if(conjuntoA[i].equalsIgnoreCase(conjuntoB[x])) {
+						conta++;
+					}
+				}
+				if(conta==0) {
+					cad=cad+conjuntoA[i]+",";
+				}
+				conta=0;
+			}
+			diferencia=cad.split(",");
+		}else {
+			for (int i=0;i<conjuntoB.length;i++) {
+				for(int x=0;x<conjuntoA.length;x++) {
+					if(conjuntoB[i].equalsIgnoreCase(conjuntoA[x])) {
+						conta++;
+					}
+				}
+				if(conta==0) {
+					cad=cad+conjuntoB[i]+",";
+				}
+				conta=0;
+			}
+			diferencia=cad.split(",");
+		}
+		return diferencia;
 	}
 }
 public class Prueba {
@@ -54,12 +91,14 @@ public class Prueba {
 		System.out.println(listaMultiplos);
 		TDAConjuntos operaciones = new TDAConjuntos();
 		String conjuntoB[]=listaMultiplos.split(",");
+		String op="";
+		do {
 		System.out.println("Elige la opcion que desees:");
 		System.out.println("A) Union");
 		System.out.println("B) Interseccion");
-		System.out.println("C) Diferencia");
+		System.out.println("C) Diferencia ");
 		System.out.println("D) Salir");
-		String op=entrada.nextLine().replace(" ","").toUpperCase();
+		op=entrada.nextLine().replace(" ","").toUpperCase();
 		switch (op) {
 		case "A":
 			System.out.println(Arrays.toString(operaciones.union(conjuntoA, conjuntoB)));
@@ -67,9 +106,34 @@ public class Prueba {
 		case "B":
 			System.out.println("Resultado de A interseccion B: "+Arrays.toString(operaciones.interseccion(conjuntoA, conjuntoB)));
 			break;
-		default:
+		case "C":
+			String op2="";
+			boolean bandera=true;
+			do {
+			System.out.println("Como quieres calcular la diferencia?");
+			System.out.println("A) A-B");
+			System.out.println("B) B-A");
+			System.out.println("C) Cancelar");
+			op2=entrada.nextLine();
+			if(op2.equalsIgnoreCase("A")) {
+				System.out.println("Resultado de la diferencia A-B:"+Arrays.toString(operaciones.diferencia(conjuntoA, conjuntoB, op2)));
+			}else if(op2.equalsIgnoreCase("B")){
+				System.out.println("Resultado de la diferencia B-A:"+Arrays.toString(operaciones.diferencia(conjuntoA, conjuntoB, op2)));
+			}else if(op2.equalsIgnoreCase("C")) {
+				bandera=false;
+			}else {
+					System.out.println("Ingresa una opcion disponible");
+				}
+			}while(bandera==true);
 			break;
-		}
+		case "D":
+			System.out.println("Saliendo....");
+			break;
+		default:
+			System.out.println("Ingresa una opcion disponible");
+			break;
+			}
+		}while (!op.equalsIgnoreCase("D"));
 	}
 
 }

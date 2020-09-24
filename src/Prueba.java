@@ -5,21 +5,28 @@ class TDAConjuntos{
 	
 	public String[] union(String conjuntoA[],String []conjuntoB) {
 		byte conta=0;
-		String cad="";
+		String cad="",cad2="";
 		String nuevoVector[]=null;
-		for (int i=0;i<conjuntoA.length;i++) {
-			for(int x=0;x<conjuntoB.length;x++) {
-				if(conjuntoA[i].equalsIgnoreCase(conjuntoB[x])) {
+		for(int i=0;i<conjuntoA.length;i++) {
+			cad=cad+conjuntoA[i]+",";
+		}
+		for(int i=0;i<conjuntoB.length;i++) {
+			conta=0;
+			for(int x=0;x<conjuntoA.length;x++) {
+				if(conjuntoB[i].equalsIgnoreCase(conjuntoA[x])) {
+				//	System.out.println(conjuntoB[i]);
 					conta++;
 				}
 			}
+			
 			if(conta==0) {
-				cad=cad+conjuntoA[i];
-			}else {
-				
-			}
+				System.out.println("if");
+				System.out.println(conjuntoB[i]);
+				cad=cad+conjuntoB[i]+",";
+			}conta=0;
 		}
-	return null;	
+		System.out.println(cad);
+	return cad.split(",");	
 	}//Union
 	public String[] interseccion(String conjuntoA[],String []conjuntoB) {
 		byte conta=0;
@@ -101,7 +108,7 @@ public class Prueba {
 		op=entrada.nextLine().replace(" ","").toUpperCase();
 		switch (op) {
 		case "A":
-			System.out.println(Arrays.toString(operaciones.union(conjuntoA, conjuntoB)));
+			System.out.println("Resultado Union: "+Arrays.toString(operaciones.union(conjuntoA, conjuntoB)));
 			break;
 		case "B":
 			System.out.println("Resultado de A interseccion B: "+Arrays.toString(operaciones.interseccion(conjuntoA, conjuntoB)));

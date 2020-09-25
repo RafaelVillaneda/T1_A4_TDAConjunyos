@@ -5,7 +5,7 @@ class TDAConjuntos{
 	
 	public String[] union(String conjuntoA[],String []conjuntoB) {
 		byte conta=0;
-		String cad="",cad2="";
+		String cad="";
 		String nuevoVector[]=null;
 		for(int i=0;i<conjuntoA.length;i++) {
 			cad=cad+conjuntoA[i]+",";
@@ -31,7 +31,6 @@ class TDAConjuntos{
 	public String[] interseccion(String conjuntoA[],String []conjuntoB) {
 		byte conta=0;
 		String cad="";
-		String nuevoVector[]=null;
 		for (int i=0;i<conjuntoA.length;i++) {
 			for(int x=0;x<conjuntoB.length;x++) {
 				if(conjuntoA[i].equalsIgnoreCase(conjuntoB[x])) {
@@ -90,8 +89,8 @@ public class Prueba {
 				"59","61","67","71",
 				"73","79","83","89","97"};
 		String listaMultiplos = "";
-		for(int i=1;i<=365;i++) {
-			if(365 % i == 0) {
+		for(int i=1;i<=350;i++) {
+			if(350 % i == 0) {
 				listaMultiplos=listaMultiplos+i+",";
 			}
 		}
